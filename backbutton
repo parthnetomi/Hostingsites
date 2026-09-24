@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="RATING" content="RTA-5042-1996-1400-1577-RTA" />
+</head>
+<body>
+    <button onclick="Netomi.chat.openWidget()">Support</button>
+    <script>
+      (function() {
+        var ns = document.createElement('script');
+        ns.src = 'https://chatapps-qa-a.netomi.com/app/script.js';
+        ns.type = 'text/javascript';
+        ns.async = true;
+        ns.setAttribute('botRefId', 'eeb746fc-b6b1-48c1-9cf3-86df01bdfbed');
+        ns.setAttribute("enableEventQueue", "true");
+        ns.setAttribute('isDynamicEnv', 'false');
+        ns.setAttribute("title", "Testing")
+        ns.setAttribute("color", "#5621db")
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ns, s);
+        ns.onload = function () {
+          window.NETOMI_WEB_WIDGET.init(() => {
+        Netomi.chat.changeBotConfig({
+          formControls: {
+            goBack: {
+              label: 'Previous piyush new',
+              style: { fill: '#1C1F2A', stroke: '#1C1F2A', text: '#FFFFFF' }
+            },
+            restart: {
+              label: 'Start Over piyush new',
+              style: { fill: '#FFFFFF', stroke: '#118CD8', text: '#118CD8' }
+            },
+            skip: {
+              label: 'Continue singh new',
+              style: { fill: '#118CD8', stroke: '#118CD8', text: '#FFFFFF' }
+            }
+          }
+        })
+      });
+
+          // ========== ON_NEW_CONVERSATION Event ==========
+          // This event fires ONLY when a new conversationId is created (not on page reload or MQTT reconnect).
+          // The widget will WAIT for done() to be called before proceeding with proactive greetings.
+          // If done() is not called, the widget will proceed after a timeout (default 2 seconds).
+          Netomi.chat.onNewConversation(function(data) {
+            console.log('[ON_NEW_CONVERSATION] New conversation started! ConversationId:', data.conversationId);
+
+            // Example: Call your API with the new conversationId
+            // Replace this with your actual API call
+            setTimeout(function() {
+              console.log('[ON_NEW_CONVERSATION] Async work complete. Calling done() to unblock the widget.');
+              data.done(); // IMPORTANT: Call done() to unblock the widget and allow greetings to proceed
+            }, 1000); // Simulating a 1-second API call
+          });
+        };
+      })();
+    </script>
+</body>
+</html>
